@@ -10,8 +10,9 @@
 export default {
   data() {
     return {
+      img: [1, 1, 2],
     }
-  }
+  },
 }
 </script>
 <style scoped lang="less">

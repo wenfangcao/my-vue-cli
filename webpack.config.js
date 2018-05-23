@@ -23,7 +23,7 @@ module.exports = {
       {test: /\.less$/,loader: 'style-loader!css-loader!postcss-loader!less-loader'},
       {test:/\.vue$/,loader:'vue-loader'},
       {test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'},
-      // {test: /\.(js|vue)$/,loader: 'eslint-loader',},
+      {test: /\.(js|vue)$/,loader: 'eslint-loader',},
     ]
   },
   resolve: {
