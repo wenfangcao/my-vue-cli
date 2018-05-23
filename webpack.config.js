@@ -10,7 +10,7 @@ const path = require('path')
 
 module.exports = {
   mode: 'none',
-  entry: __dirname + "/src.1/main.js",
+  entry: __dirname + "/src/main.js",
   output: {
     path: path.resolve(__dirname,"build"),
     filename: "app-[hash].js",
