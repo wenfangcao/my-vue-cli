@@ -4,11 +4,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin') //自动删除前次打包文件
 const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 const path = require('path')
 
 module.exports = {
   mode: 'none',
-  entry: __dirname + "/src/index.js",
+  entry: __dirname + "/src.1/main.js",
   output: {
     path: path.resolve(__dirname,"build"),
     filename: "app-[hash].js",
@@ -23,7 +24,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.vue','.js',".css",'jsx']
+    extensions: ['.vue','.js',".css",'jsx'],
+    alias:{
+      'vue$': 'vue/dist/vue.esm.js'
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -49,6 +53,7 @@ module.exports = {
         ignore: ['.*']
       }
     ]),
+    new VueLoaderPlugin(),
   ],
   devtool:'eval-source-map',
   devServer: {
