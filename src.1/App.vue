@@ -1,7 +1,6 @@
 <template>
   <div>
     <router-view></router-view>
-    1234
   </div>
 </template>
 
@@ -9,3 +8,7 @@
 export default {
 }
 </script>
+
+<style lang="less">
+// @import 'assets/css/common.less';
+</style>

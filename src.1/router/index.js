@@ -1,4 +1,5 @@
 import index from '../components/Index'
+import next from '../components/next'
 const router = new VueRouter({
   //mode: "history",
   routes: [
@@ -10,6 +11,15 @@ const router = new VueRouter({
         title:'index'
       },
       component: index
+    },
+    {
+      path:'/next',
+      name:'next',
+      meta: {
+        auth: true,
+        title:'next'
+      },
+      component: next
     }
   ]
 })

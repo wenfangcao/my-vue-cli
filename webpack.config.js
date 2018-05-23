@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin') //自动删除前次�
 const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const path = require('path')
 
 module.exports = {
@@ -19,12 +20,13 @@ module.exports = {
     rules: [
       {test: /(\.jsx|\.js)$/,use: {loader: "babel-loader"},exclude: /node_modules/},
       {test: /\.css$/,use: [{loader: "style-loader"}, {loader: "css-loader"}]},
+      {test: /\.less$/,loader: 'style-loader!css-loader!less-loader'},
       {test:/\.vue$/,loader:'vue-loader'},
       {test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'},
     ]
   },
   resolve: {
-    extensions: ['.vue','.js',".css",'jsx'],
+    extensions: ['.vue', '.js', ".css", 'jsx', '.less'],
     alias:{
       'vue$': 'vue/dist/vue.esm.js'
     }
@@ -33,7 +35,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.template.html',
-      inject: 'head',
+      inject: 'body',
     }),
     new CleanWebpackPlugin(
       ['dist/main.*.js','dist/manifest.*.js',],　 //匹配删除的文件
@@ -54,6 +56,7 @@ module.exports = {
       }
     ]),
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin("styles.css"),//打包成独立的css文件
   ],
   devtool:'eval-source-map',
   devServer: {

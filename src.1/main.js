@@ -1,16 +1,9 @@
-
 import App from './App'
 import router from './router'
+// import './assets/css/reset.less'
 
-// new Vue({
-//   el: '#app',
-//   router,
-//   // store,
-//   template: '<App/>',
-//   components: { App }
-// })
-new Vue({
+var app = new Vue({
   el: '#app',
-  router,  // 注入到根实例中
+  router,
   render: h => h(App)
 })
