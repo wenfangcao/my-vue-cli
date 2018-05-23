@@ -20,6 +20,7 @@ export default {
   width: 100px;
   height: 100px;
   background: @goodBlur;
+  display: flex;
   span{
     font-size: @fontSize;
   }

@@ -12,11 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "ansi-regex": "^3.0.0",
+    "autoprefixer": "^8.5.0",
     "copy-webpack-plugin": "^4.5.1",
     "eslint-loader": "^2.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "open-browser-webpack-plugin": "^0.0.5",
+    "postcss-loader": "^2.1.5",
     "url": "^0.11.0",
     "webpack": "^4.8.3"
   },

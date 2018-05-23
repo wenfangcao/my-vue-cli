@@ -20,7 +20,7 @@ module.exports = {
     rules: [
       {test: /(\.jsx|\.js)$/,use: {loader: "babel-loader"},exclude: /node_modules/},
       {test: /\.css$/,use: [{loader: "style-loader"}, {loader: "css-loader"}]},
-      {test: /\.less$/,loader: 'style-loader!css-loader!less-loader'},
+      {test: /\.less$/,loader: 'style-loader!css-loader!postcss-loader!less-loader'},
       {test:/\.vue$/,loader:'vue-loader'},
       {test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'},
       // {test: /\.(js|vue)$/,loader: 'eslint-loader',},
