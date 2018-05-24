@@ -13,17 +13,16 @@ module.exports = {
   entry: __dirname + "/src/main.js",
   output: {
     path: path.resolve(__dirname,"build"),
-    filename: "app-[hash].js",
-    hashDigestLength: 8,
+    filename: "js/[name].js",
   },
   module: {
     rules: [
-      {test: /(\.jsx|\.js)$/,use: {loader: "babel-loader"},exclude: /node_modules/},
-      {test: /\.css$/,use: [{loader: "style-loader"}, {loader: "css-loader"}]},
-      {test: /\.less$/,loader: 'style-loader!css-loader!postcss-loader!less-loader'},
-      {test:/\.vue$/,loader:'vue-loader'},
+      {test: /(\.jsx|\.js)$/, use: {loader: "babel-loader"}, exclude: /node_modules/},
+      {test: /\.css$/, use: ["style-loader", "css-loader"]},
+      {test: /\.less$/, use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']},
+      {test: /\.vue$/, loader:'vue-loader'},
       {test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'},
-      {test: /\.(js|vue)$/,loader: 'eslint-loader',},
+      {test: /\.(js|vue)$/, loader: 'eslint-loader'},
     ]
   },
   resolve: {
@@ -57,8 +56,24 @@ module.exports = {
       }
     ]),
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin("styles.css"),//打包成独立的css文件
+    new MiniCssExtractPlugin({filename: 'css/[name].css'}),//打包成独立的css文件
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'initial', // 只对入口文件处理
+      cacheGroups: {
+        vendor: { // split `node_modules`目录下被打包的代码到 `page/vendor.js && .css` 没找到可打包文件的话，则没有。css需要依赖 `ExtractTextPlugin`
+            test: /node_modules\//,
+            name: 'vendor',
+            priority: 10,
+            enforce: true
+        },
+      }
+    },
+    runtimeChunk: {
+      name: 'manifest'
+    }
+  },
   devtool:'eval-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, "build"),

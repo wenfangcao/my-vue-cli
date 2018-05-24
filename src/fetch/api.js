@@ -1,32 +1,5 @@
 import url from './url.js'
-import isDev from './config'
 
-function isExpired(res){
-  if(isDev){
-    return false 
-  }
-  if ((res.status >= 200 && res.status < 300) || res.status == 101){
-    
-    if(res.data.status == 3){
-      sessionStorage.clear() ;
-      Vue.prototype.$message({
-        message: '登录失效，请刷新页面！',
-        type: 'error'
-      });
-      return true
-    }else{
-      return false 
-    }
-	
-  }else{
-	Vue.prototype.$message({
-	  message: res.result ,
-	  type: 'error'
-	});
-    return true	
-  }
-  
-} 
 // http request 拦截器
 axios.interceptors.request.use(
     config => {
@@ -53,9 +26,6 @@ export function fetchPost(url, params) {
   return new Promise((resolve, reject) => {
     axios.post(url, params)
       .then(res => {
-        if(isExpired(res)){
-          return 
-        }
         resolve(res.data);
       })
       .catch((err) => {
@@ -68,9 +38,6 @@ export function fetchGet(url, params) {
   return new Promise((resolve, reject) => {
     axios.get(url, params)
       .then(res => {
-        if(isExpired(res)){
-          return 
-        }
         resolve(res.data);
       })
       .catch((err) => {
