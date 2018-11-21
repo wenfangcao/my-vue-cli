@@ -1,5 +1,8 @@
 <template>
-  <div>this is next page</div>
+  <div>
+    <div>this is next page</div>
+    <button>{{$store.state.count}}</button>
+  </div>
 </template>
 <script>
 export default {

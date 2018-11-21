@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div class="d1">
-      <span>123</span>
-    </div>
     <router-link to="/next">to next</router-link>
+    <button>{{$store.state.count}}</button>
+    <button @click="click">add</button>
   </div>
 </template>
 <script>
@@ -12,6 +11,12 @@ export default {
     return {
       img: [1, 1, 2],
     }
+  },
+  methods: {
+    click() {
+      console.log(this.$store)
+      this.$store.commit('increment', '12')
+    },
   },
 }
 </script>
